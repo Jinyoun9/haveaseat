@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>식당 현황 : Have a seat</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <tbody>
+        <tr>
+            <td th:each="r:${restaurantlist}">
+                <div class="container" th:each="rs:${rstatuslist}">
+                    <h3 th:text="${r.restaurantname}+ ' ' + ${rs.current + '/' + rs.max}"></h3>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <form action="/checkin" method="get">
+        <button>좌석 추가하기(QR로 대체 예정)</button>
+    </form>
+</body>
+</html>

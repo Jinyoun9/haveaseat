@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 좌석 선택 레이아웃 스타일 */
+        .seat-map {
+            display: grid;
+            grid-template-columns: repeat(5, 50px); /* 5열 */
+            gap: 10px; /* 좌석 간격 */
+        }
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .seat.selected {
+            background-color: #6ab04c; /* 선택된 좌석 색상 */
+        }
+
+
+        #addSeat{
+            margin-top: 20px; /* 버튼 위 간격 추가 */
+            background-color: #6ab04c;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 10%;
+            width: 100px;
+            height: 50px;
+        }
+        #addSeat:hover{
+            filter: brightness(0.9);
+        }
+    </style>
+</head>
+<body>
+    <tbody>
+        <tr>
+            <td th:each="r:${restaurantlist}">
+                <div class="container" th:each="rs:${rstatuslist}">
+                    <h3 th:text="${r.restaurantname}+ ' ' + ${rs.current + '/' + rs.max}"></h3>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <form action="/checkinpro/1" method="post">
+        <div class="seat-map">
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+            <div><input class="seat" type="button" name="current" required/></div>
+
+        </div>
+        <button id="addSeat" type="submit">추가</button>
+    </form>
+    <script>
+
+        const seats = document.querySelectorAll('.seat');
+
+        seats.forEach(seat => {
+            seat.addEventListener('click', () => {
+                // 이미 선택된 좌석이 있다면 선택 해제
+                const selectedSeats = document.querySelectorAll('.seat.selected');
+                selectedSeats.forEach(selectedSeat => {
+                    selectedSeat.classList.remove('selected');
+                });
+                // 클릭한 좌석 선택
+                seat.classList.add('selected');
+            });
+        });
+
+    </script>
+</body>
+</html>

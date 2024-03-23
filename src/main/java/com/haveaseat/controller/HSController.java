@@ -32,6 +32,7 @@ public class HSController {
     @PostMapping("/checkinpro/{id}")
     public String checkinPro(@PathVariable("id")int id, Resstatus resstatus, Model model) throws IOException {
             Resstatus rsTemp = hsService.rstatusView(id);
+            rsTemp.setCurrent(rsTemp.getCurrent() + 2);
             hsService.write(rsTemp);
             model.addAttribute("message", "좌석이 추가되었습니다.");
             model.addAttribute("destUrl", "/index");
